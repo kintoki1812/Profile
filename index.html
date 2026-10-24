@@ -17,13 +17,9 @@
         rel="stylesheet">
 
     <style>
-        /* ============================================================
-           FIX SCROLL — html/body chuẩn, không scroll container lạ
-           ============================================================ */
         html {
             background: #05070f;
             -webkit-text-size-adjust: 100%;
-            /* Chặn pull-to-refresh + bounce trên iOS/Android */
             overscroll-behavior-y: none;
         }
 
@@ -33,9 +29,6 @@
             inherits: false;
         }
 
-        /* ============================================================
-           BIẾN THIẾT KẾ
-           ============================================================ */
         :root {
             --card-w: 400px;
             --card-pad-top: 40px;
@@ -125,9 +118,6 @@
             }
         }
 
-        /* ============================================================
-           RESET & BASE — không set overflow ở html, không height: 100%
-           ============================================================ */
         *,
         *::before,
         *::after {
@@ -136,7 +126,6 @@
 
         body {
             margin: 0;
-            /* svh = viewport nhỏ nhất (address bar hiện) — không bị jump */
             min-height: 100vh;
             min-height: 100svh;
             display: flex;
@@ -149,7 +138,6 @@
             font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
             color: #ffffff;
             background: #05070f;
-            /* clip: KHÔNG tạo scroll container → scroll dọc vẫn chuẩn */
             overflow-x: clip;
             overscroll-behavior-y: none;
             -webkit-font-smoothing: antialiased;
@@ -157,9 +145,6 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* ============================================================
-           AURORA BACKGROUND
-           ============================================================ */
         .aurora {
             position: fixed;
             inset: 0;
@@ -219,9 +204,6 @@
             transform: translateZ(0);
         }
 
-        /* ============================================================
-           CARD
-           ============================================================ */
         .card {
             position: relative;
             z-index: 1;
@@ -274,9 +256,6 @@
             pointer-events: none;
         }
 
-        /* ============================================================
-           AVATAR
-           ============================================================ */
         .avatar-wrap {
             position: relative;
             width: var(--avatar-outer);
@@ -324,9 +303,6 @@
             transform: scale(1.07) rotate(-3deg);
         }
 
-        /* ============================================================
-           TÊN & BIỆT DANH
-           ============================================================ */
         .name {
             font-family: 'Space Grotesk', sans-serif;
             font-size: var(--name-size);
@@ -366,9 +342,6 @@
             flex-shrink: 0;
         }
 
-        /* ============================================================
-           CHIP LIÊN HỆ
-           ============================================================ */
         .chips {
             display: grid;
             gap: var(--gap-chips);
@@ -417,9 +390,6 @@
             transition-duration: 0.1s;
         }
 
-        /* ============================================================
-           DANH SÁCH LINK
-           ============================================================ */
         .links {
             display: grid;
             gap: var(--gap-links);
@@ -545,9 +515,6 @@
         .link-btn:nth-child(5) { animation-delay: 0.63s; }
         .link-btn:nth-child(6) { animation-delay: 0.70s; }
 
-        /* ============================================================
-           KEYFRAMES
-           ============================================================ */
         @keyframes card-in {
             from { opacity: 0; transform: translateY(24px) scale(0.97); }
             to   { opacity: 1; transform: none; }
@@ -587,11 +554,7 @@
             50%      { transform: translate(50px, -70px) scale(1.1); }
         }
 
-        /* ============================================================
-           MOBILE — thay animation nặng bằng nền tĩnh, không lag scroll
-           ============================================================ */
         @media (max-width: 768px) {
-            /* Ẩn blob animate + grid phức tạp — thay bằng radial gradient tĩnh */
             .aurora,
             .grid-overlay {
                 display: none;
@@ -606,34 +569,27 @@
                 background-attachment: fixed;
             }
 
-            /* Blur nhẹ hơn — vẫn giữ hiệu ứng kính */
             .card {
                 -webkit-backdrop-filter: blur(10px) saturate(130%);
                 backdrop-filter: blur(10px) saturate(130%);
             }
 
-            /* Viền card: gradient tĩnh thay vì xoay — zero GPU cost */
             .card::before {
                 animation: none;
                 background: linear-gradient(135deg, #22d3ee, #a78bfa 50%, #f472b6);
                 opacity: 0.7;
             }
 
-            /* Vòng avatar: gradient tĩnh thay vì xoay */
             .avatar-ring {
                 animation: none;
                 filter: none;
             }
 
-            /* Tắt hiệu ứng hover (mobile không có hover, giảm tải) */
             .avatar-wrap:hover .avatar {
                 transform: none;
             }
         }
 
-        /* ============================================================
-           TÔN TRỌNG GIẢM CHUYỂN ĐỘNG
-           ============================================================ */
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after {
                 animation-duration: 0.01ms !important;
